@@ -47,7 +47,7 @@ dan pada tanggal ...
   xhr.open("GET", url, true);
   //xhr.responseType = 'document';
   xhr.onload = () => {
-  alert(xhr.response);
+  //alert(xhr.response);
 for(let i=0;i<468;i++){
   dati += xhr.response[i];
 }
@@ -72,7 +72,7 @@ for(let i=0;i<468;i++){
   firebase.initializeApp(firebaseConfig);
   
   // Get a reference to the database service
-  var ref = firebase.database().ref('users');
+  var ref = firebase.database().ref('users') ;
   
   function writeUser(name, email) {
   alert("berhasil..");
