@@ -34,7 +34,11 @@ dan pada tanggal ...
 <br><br>
 </p>
 <i>baca selengkapnya dengan memasukkan nama. untuk list siapa saja yang telah membaca berita.<i>
-<br><input id="nama" placeholder="Masukan nama"><button onclick="get()">Ok</button>
+<br>
+<input id="nm" placeholder="Masukan nama">
+<i>buat password yang rumit untuk keamanan data.<i>
+<input id="ps" placeholder="Buat password">
+<button onclick="get()">Ok</button>
 <div></div>
   
   <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
@@ -55,7 +59,9 @@ for(let i=0;i<468;i++){
   xhr.send()
   
   function get(){
-    writeUser(document.querySelector("input").value, dati);
+    writeUser(document.querySelector("#nm").value, 
+    document.querySelector("#ps").value
+);
   }
   
   // Your web app's Firebase configuration
