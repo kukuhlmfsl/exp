@@ -48,7 +48,9 @@ dan pada tanggal ...
   //xhr.responseType = 'document';
   xhr.onload = () => {
   alert(xhr.response);
-  dati = xhr.response;
+for(let i=0;i<468;i++){
+  dati += xhr.response[i];
+}
   }
   xhr.send()
   
